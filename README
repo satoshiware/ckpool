@@ -1,13 +1,10 @@
 CKPOOL + CKPROXY + libckpool by Con Kolivas
+Modified for microcurrencies.
 
 Ultra low overhead massively scalable multi-process, multi-threaded modular
 bitcoin mining pool, proxy, passthrough, and library in c for Linux.
 
-CKPOOL is code provided free of charge under the GPLv3 license but its development
-is mostly paid for by commissioned funding, and the pool by default contributes
-0.5% of solved blocks in pool mode to the development team. Please consider leaving
-this contribution in the code if you are running it on a pool or contributing to the
-authors listed in AUTHORS if you use this code to aid funding further development.
+CKPOOL is code provided free of charge under the GPLv3 license.
 
 ---
 LICENSE:
