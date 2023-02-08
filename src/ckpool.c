@@ -1809,24 +1809,21 @@ int main(int argc, char **argv)
 	parse_config(&ckp);
 	/* Set defaults if not found in config file */
 	if (!ckp.btcds) {
-		ckp.btcds = 1;
-		ckp.btcdurl = ckzalloc(sizeof(char *));
-		ckp.btcdauth = ckzalloc(sizeof(char *));
-		ckp.btcdpass = ckzalloc(sizeof(char *));
-		ckp.btcdnotify = ckzalloc(sizeof(bool));
+		quit(0, "No btcd entry found in config file %s", ckp.config);
 	}
 	for (i = 0; i < ckp.btcds; i++) {
 		if (!ckp.btcdurl[i])
-			ckp.btcdurl[i] = strdup("localhost:8332");
+			quit(0, "No url entry for btcd in config file %s", ckp.config);
 		if (!ckp.btcdauth[i])
-			ckp.btcdauth[i] = strdup("user");
+			quit(0, "No username entry for btcd in config file %s", ckp.config);
 		if (!ckp.btcdpass[i])
-			ckp.btcdpass[i] = strdup("pass");
+			quit(0, "No password entry for btcd in config file %s", ckp.config);
+		if (!ckp.btcdnotify[i])
+			quit(0, "No notify entry for btcd in config file %s", ckp.config);
 	}
 
-	ckp.donaddress = "14BMjogz69qe8hk9thyzbmR5pg34mVKB1e";
 	if (!ckp.btcaddress)
-		ckp.btcaddress = ckp.donaddress;
+		quit(0, "No address entry found in config file %s", ckp.config);
 	if (!ckp.blockpoll)
 		ckp.blockpoll = 100;
 	if (!ckp.nonce1length)
@@ -1854,7 +1851,7 @@ int main(int argc, char **argv)
 	if (ckp.redirector && !ckp.redirecturls)
 		quit(0, "No redirect entries found in config file %s", ckp.config);
 	if (!ckp.zmqblock)
-		ckp.zmqblock = "tcp://127.0.0.1:28332";
+		quit(0, "No zmqblock entry in config file %s", ckp.config);
 
 	/* Create the log directory */
 	trail_slash(&ckp.logdir);
